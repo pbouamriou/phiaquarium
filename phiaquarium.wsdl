@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="phiaquarium"
+ targetNamespace="http://phiaquarium.thegueven.fr/wsdl/phiaquarium.wsdl"
+ xmlns:tns="http://phiaquarium.thegueven.fr/wsdl/phiaquarium.wsdl"
+ xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+ xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+ xmlns:ns="urn:phiaquarium"
+ xmlns:SOAP="http://schemas.xmlsoap.org/wsdl/soap/"
+ xmlns:MIME="http://schemas.xmlsoap.org/wsdl/mime/"
+ xmlns:DIME="http://schemas.xmlsoap.org/ws/2002/04/dime/wsdl/"
+ xmlns:WSDL="http://schemas.xmlsoap.org/wsdl/"
+ xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+<types>
+
+ <schema targetNamespace="urn:phiaquarium"
+  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:ns="urn:phiaquarium"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="unqualified"
+  attributeFormDefault="unqualified">
+  <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+ </schema>
+
+</types>
+
+<message name="phValueRequest">
+</message>
+
+<message name="phValueResponse">
+ <part name="result" type="xsd:double"/>
+</message>
+
+<portType name="phiaquariumPortType">
+ <operation name="getPhValue">
+  <documentation>Get the Ph Value</documentation>
+  <input message="tns:phValueRequest"/>
+  <output message="tns:phValueResponse"/>
+ </operation>
+</portType>
+
+<binding name="phiaquarium" type="tns:phiaquariumPortType">
+ <SOAP:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+ <operation name="getPhValue">
+  <SOAP:operation style="rpc" soapAction=""/>
+  <input>
+     <SOAP:body use="encoded" namespace="urn:phiaquarium" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+  </input>
+  <output>
+     <SOAP:body use="encoded" namespace="urn:phiaquarium" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+  </output>
+ </operation>
+</binding>
+
+<service name="phiaquarium">
+ <documentation>gSOAP 2.7.9k generated service definition</documentation>
+ <port name="phiaquarium" binding="tns:phiaquarium">
+  <SOAP:address location="http://phidgets:5050/phiaquariumserver.cgi"/>
+ </port>
+</service>
+
+</definitions>
